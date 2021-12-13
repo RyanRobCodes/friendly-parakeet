@@ -1,30 +1,31 @@
 // Assignment code here
 
+var specialChar = "!@#$%^&*()";
+var finalArray = [];
+var passwordGenerated = "";
+var minimumCount = 0;
 
-finalArray = [];
-function lowercaseGenerator () {
-  var result = " ";
-  var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-  var passwordLength = password.length;
-  for (var i = 0; i< length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * passwordLength));
-  }
-  result.toLowerCase
-  return result;
+var minimumLowercase= "";
+var minimumUppercase = "";
+var minimumNumeric = "";
+var minimumSpecialChar = "";
+
+function lowercaseGenerator (passwordLength) {
+  return String.fromCharCode(Math.floor(Math.random() * 26 + 97));
 }
-console.log(lowercaseGenerator());
 
 function uppercaseGenerator() {
-  String.toUppercase()
+  return String.fromCharCode(Math.floor(Math.random() * 26 + 65)); 
 }
 
 function numericGenerator () {
-  Number()
+  return String.fromCharCode(Math.floor(Math.random() * 10 + 48));
 }
 
-//function specialGenerator () {
-  //String.
-//}
+function specialGenerator () {
+  return specialChar[Math.floor(Math.random() * specialChar.length)]
+}
+
 
 function generatePassword() {
   var passwordLength = window.prompt("How many characters do you want your password to contain? (Choose a number between 8 and 128)")
@@ -39,35 +40,44 @@ function generatePassword() {
   var confirmLowerCase = window.confirm("Would you like to include lowercase characters?")
   if (confirmLowerCase === true) {
     finalArray.push(lowercaseGenerator)
-  }
-  else {
-    console.log("Thanks");
+    minimumCount++;
   }
 
   var confirmUpperCase = window.confirm("Would you like to include uppercase characters?")
   if (confirmUpperCase === true) {
     finalArray.push(uppercaseGenerator)
+    minimumCount++;
   }
-    else {
-      console.log("Thanks")
-    }
-
 
   var confirmNumeric = window.confirm("Would you like to include numeric characters?")
   if (confirmNumeric === true) {
     finalArray.push(numericGenerator)
+    minimumCount++;
     }
 
-  //var confirmSpecialChar = window.confirm("Would you like to include special characters?")
-  //if (confirmSpecialChar === true) {
-    //finalArray.push(specialGenerator)
-  //}
+  var confirmSpecialChar = window.confirm("Would you like to include special characters?")
+  if (confirmSpecialChar === true) {
+    finalArray.push(specialGenerator)
+    minimumCount++;
 
   }
 
-  function randomNumber() {
-    finalArray
+  for (let i = 0; i < (parseInt(passwordLength) - minimumCount); i++) {
+    var stringChosen = Math.floor(Math.random() * 4);
+
+    passwordGenerated += stringChosen;
+
   }
+
+  passwordGenerated += minimumLowercase;
+  passwordGenerated += minimumUppercase;
+  passwordGenerated += minimumNumeric;
+  passwordGenerated += minimumSpecialChar;
+
+  return passwordGenerated;
+
+  }
+
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
